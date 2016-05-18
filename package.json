@@ -1,0 +1,25 @@
+{
+  "name": "xwallet",
+  "version": "0.0.1",
+  "description": "Public wallet API for bitcoin and counterparty wallet",
+  "engines": {
+    "node": "^5"
+  },
+  "main": "src/index.js",
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha src/index.test.js"
+  },
+  "author": "Devon Weller <devon@tokenly.com>",
+  "license": "AGPL-3.0",
+  "dependencies": {
+    "body-parser": "^1.15.1",
+    "express": "^4.13.4",
+    "promise": "^7.1.1",
+    "restler": "^3.4.0"
+  },
+  "devDependencies": {
+    "mocha": "^2.4.5",
+    "sinon": "^1.17.4",
+    "supertest": "^1.2.0"
+  }
+}
