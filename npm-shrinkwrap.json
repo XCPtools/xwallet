@@ -139,6 +139,11 @@
       "from": "extend@3.0.0",
       "resolved": "https://registry.npmjs.org/extend/-/extend-3.0.0.tgz"
     },
+    "figlet": {
+      "version": "1.1.2",
+      "from": "figlet@latest",
+      "resolved": "https://registry.npmjs.org/figlet/-/figlet-1.1.2.tgz"
+    },
     "finalhandler": {
       "version": "0.4.1",
       "from": "finalhandler@0.4.1",

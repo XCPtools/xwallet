@@ -94,7 +94,7 @@ exports.run = (serverPort, xchainClient)=> {
     });
 
     app.listen(serverPort, ()=>{
-        console.log('server listening on port '+serverPort);
+        app.emit('listening', null);
     });
 
     return app
