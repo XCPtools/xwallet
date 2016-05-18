@@ -9,7 +9,7 @@ const Promise = require('promise');
 const API_PREFIX = '/api/v1/';
 
 
-exports.run = (serverPort, xchainClient)=> {
+exports.run = (serverPort, xchainClient, debug)=> {
     // set up express
     let app = express();
     app.disable('etag');

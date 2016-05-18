@@ -7,7 +7,7 @@ let rest = require('restler');
 const XCHAIN_API_PREFIX = '/api/v1/';
 
 
-exports.newClient = (xchainConnectionUrl, serverHost)=> {
+exports.newClient = (xchainConnectionUrl, serverHost, debug)=> {
 
     let xchainClient = {}
 
@@ -52,6 +52,9 @@ exports.newClient = (xchainConnectionUrl, serverHost)=> {
     }
 
     xchainClient.sendRequestToXChain = (url, requestOptions) => {
+        if (debug) {
+            console.log(`sending request to xchain at ${url}`);
+        }
         return rest.request(url, requestOptions)
     }
 
@@ -62,6 +65,9 @@ exports.newClient = (xchainConnectionUrl, serverHost)=> {
             httpResponse.send(JSON.stringify({message: "An internal error occurred", errorCode: "500"}));
         }
 
+        if (debug) {
+            console.log(`received response from xchain with code ${xchainResponse.statusCode}`);
+        }
         httpResponse.set('content-type', xchainResponse.headers['content-type']);
         httpResponse.status(xchainResponse.statusCode);
         httpResponse.send(data);
