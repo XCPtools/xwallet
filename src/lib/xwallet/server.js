@@ -79,10 +79,19 @@ exports.run = (serverPort, xchainClient)=> {
     });
 
 
+    // healthcheck
+    app.get('/_health', (req, res)=> {
+        res.set('Content-Type', 'text/plain');
+        res.status(200);
+        res.send('ok');
+    });
+
+
 
     // default 404
     app.use(function(req, res) {
         res.status(404);
+        res.set('Content-Type', 'application/json');
         res.send(JSON.stringify({message: "This route was not found.", errorCode: "404"}));
     });
 
@@ -90,6 +99,7 @@ exports.run = (serverPort, xchainClient)=> {
     app.use(function(error, req, res, next) {
         console.log('error: ', error);
         res.status(500);
+        res.set('Content-Type', 'application/json');
         res.send(JSON.stringify({message: "Internal Server Error", errorCode: "500"}));
     });
 

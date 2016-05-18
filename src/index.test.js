@@ -22,6 +22,17 @@ function runTests() {
     describe('The API server', function() {
       // ----------------------------------------------
 
+      it('should respond to health check', function(done) {
+        supertest(app)
+          .get('/_health')
+          .set('Accept', 'application/json')
+          .expect('Content-Type', /text\/plain/)
+          .expect(/ok/)
+          .expect(200, done);
+      });
+
+      // ----------------------------------------------
+
       it('should show landing page', function(done) {
         supertest(app)
           .get('/')
@@ -162,6 +173,20 @@ function runTests() {
           .expect('Content-Type', /json/)
           .expect({sent: {method: 'GET', signedUrl: 'http://xwallet.local/api/v1/balances/8ccccccc-1234-5678-1234-cccccccc1111', xchainRelPath: 'accounts/balances/8ccccccc-1234-5678-1234-cccccccc1111', data: null}})
           .expect(200, done);
+      });
+
+      // ----------------------------------------------
+
+      it('should show 404 errors', function(done) {
+        signRequest(setHost(
+           supertest(app)
+          .get('/api/v1/i-am-not-found')
+          .set('Accept', 'application/json')
+        ))
+          .expect(404)
+          .expect('Content-Type', /json/)
+          .expect({message: "This route was not found.", errorCode: "404"})
+          .expect(404, done);
       });
 
 
