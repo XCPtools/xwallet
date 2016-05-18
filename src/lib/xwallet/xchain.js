@@ -34,6 +34,10 @@ exports.newClient = (xchainConnectionUrl, serverHost, debug)=> {
         requestOptions.headers['X-TOKENLY-AUTH-SIGNATURE']  = httpRequest.get('X-TOKENLY-AUTH-SIGNATURE');
         requestOptions.headers['X-TOKENLY-AUTH-SIGNED-URL'] = httpRequest.protocol+'://'+httpRequest.hostname+httpRequest.path;
 
+        if (debug) {
+            console.log(`signed URL is ${requestOptions.headers['X-TOKENLY-AUTH-SIGNED-URL']}`);
+        }
+
         if (method == 'POST' || method == 'PUT') {
             requestOptions.headers['content-type'] = 'application/json';
             if (body) {

@@ -9,11 +9,19 @@ const Promise = require('promise');
 const API_PREFIX = '/api/v1/';
 
 
-exports.run = (serverPort, xchainClient, debug)=> {
+exports.run = (serverPort, xchainClient, opts)=> {
+    opts = opts || {}
+    let debug = !!opts.debug;
+
     // set up express
     let app = express();
     app.disable('etag');
     app.disable('x-powered-by');
+
+    if (opts.trustedProxy != null && opts.trustedProxy.length > 0) {
+        app.set('trust proxy', opts.trustedProxy);
+    }
+
     app.use(bodyParser.json());
 
     // route
