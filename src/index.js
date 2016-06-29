@@ -12,7 +12,8 @@ opts.serverHost          = process.env.SERVER_HOST           || 'https://xwallet
 opts.serverPort          = process.env.SERVER_PORT           || 3000;
 opts.xchainConnectionUrl = process.env.XCHAIN_CONNECTION_URL || "http://xchain.web01.stage01.tokenly.co";
 opts.trustedProxy        = process.env.TRUSTED_PROXY         || "loopback";
-opts.debug               = process.env.DEBUG || false;
+opts.useSSL              = process.env.USE_SSL               || false;
+opts.debug               = process.env.DEBUG                 || false;
 
 let xchainClient = xchain.newClient(opts.xchainConnectionUrl, opts.serverHost, opts.debug)
 let server = xwalletServer.run(opts.serverPort, xchainClient, opts)

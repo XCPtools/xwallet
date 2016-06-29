@@ -22,6 +22,17 @@ exports.run = (serverPort, xchainClient, opts)=> {
         app.set('trust proxy', opts.trustedProxy);
     }
 
+    // TLS middleware
+    if (opts.useSSL) {
+        let requireTLS = function(req, res, next) {
+            if (!req.secure) {
+                return res.redirect('https://' + req.get('host') + req.url);
+            }
+            next();
+        }
+        app.use(requireTLS);
+    }
+
     app.use(bodyParser.json());
 
     // route
